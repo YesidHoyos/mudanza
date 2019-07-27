@@ -2,16 +2,12 @@ package com.yesid.mudanza.domain.model;
 
 import java.util.List;
 
-public class Carrier {
+import com.yesid.mudanza.domain.services.MakeMoveServices;
 
-	private List<Workday> workdays;
-	
-	public Carrier(List<Workday> workdays) {
-		this.workdays = workdays;
-		
-	}
+public class Carrier implements MakeMoveServices{
 
-	public List<Workday> getWorkdays() {
-		return workdays;
+	@Override
+	public List<Integer> makeElementTrips(List<Workday> workDays) {
+		return null;
 	}
 }
