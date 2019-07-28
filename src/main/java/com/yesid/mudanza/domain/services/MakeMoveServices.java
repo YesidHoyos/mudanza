@@ -14,5 +14,5 @@ public interface MakeMoveServices {
 	 * @param dni: identificación del transportista
 	 * @return cantidad de viajes realizados por cada día de mudanza
 	 */
-	public List<String> makeElementTrips(List<Workday> workDays, String dni);
+	public List<String> makeItemTrips(List<Workday> workDays, String dni);
 }

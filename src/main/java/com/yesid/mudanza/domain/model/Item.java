@@ -1,10 +1,10 @@
 package com.yesid.mudanza.domain.model;
 
-public class MovingElement {
+public class Item {
 
 	private int weight;
 	
-	public MovingElement(int weight) {
+	public Item(int weight) {
 		this.weight = weight;
 	}
 

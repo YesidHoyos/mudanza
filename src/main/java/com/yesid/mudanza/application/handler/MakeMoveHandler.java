@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yesid.mudanza.application.exception.UnexpectedException;
 import com.yesid.mudanza.application.factory.WorkdayFactory;
 import com.yesid.mudanza.domain.model.Carrier;
 import com.yesid.mudanza.domain.model.Workday;
@@ -26,7 +27,7 @@ public class MakeMoveHandler {
 	
 	public byte[] makeElementTrips(MultipartFile input, String dni) {
 		List<Workday> workDays = workdayFactory.create(input);
-		List<String> tripsMadeDay = carrier.makeElementTrips(workDays, dni);
+		List<String> tripsMadeDay = carrier.makeItemTrips(workDays, dni);
 		return getBytes(tripsMadeDay);
 	}
 	
@@ -39,7 +40,7 @@ public class MakeMoveHandler {
 			try {
 				tripsMadeDayByte.write(tripsLine.getBytes());
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw new UnexpectedException(WorkdayFactory.UNEXPECTED_EXCEPTION);
 			}
 			trip.getAndIncrement();
 		});

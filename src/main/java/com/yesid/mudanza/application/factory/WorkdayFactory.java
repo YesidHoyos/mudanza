@@ -12,15 +12,18 @@ import java.util.function.IntConsumer;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yesid.mudanza.domain.model.MovingElement;
+import com.yesid.mudanza.application.exception.UnexpectedException;
+import com.yesid.mudanza.domain.model.Item;
 import com.yesid.mudanza.domain.model.Workday;
 
 @Component
 public class WorkdayFactory {
 
+	public static final String UNEXPECTED_EXCEPTION = "Ha ocurrido un error inesperado";
+
 	public List<Workday> create(MultipartFile multipartFile) {
 		BufferedReader assignedTasks = multipartFileToBufferedReader(multipartFile);
-		List<MovingElement> itemsToTransport = new ArrayList<>();
+		List<Item> itemsToMove = new ArrayList<>();
 		List<Workday> workDays = new ArrayList<>();
 		AtomicInteger dayLinePosition = new AtomicInteger(0);
 		AtomicInteger linePosition = new AtomicInteger(1);
@@ -30,11 +33,11 @@ public class WorkdayFactory {
 				dayLinePosition.addAndGet(line);
 				dayLinePosition.getAndIncrement();
 			} else if(linePosition.get() < dayLinePosition.get()){
-				itemsToTransport.add(new MovingElement(line));
+				itemsToMove.add(new Item(line));
 			} else {
-				itemsToTransport.add(new MovingElement(line));
-				workDays.add(new Workday(new ArrayList<>(itemsToTransport)));
-				itemsToTransport.clear();
+				itemsToMove.add(new Item(line));
+				workDays.add(new Workday(new ArrayList<>(itemsToMove)));
+				itemsToMove.clear();
 			}
 			linePosition.incrementAndGet();
 		};
@@ -47,7 +50,7 @@ public class WorkdayFactory {
 		try {
 			inputStream = multipartFile.getInputStream();
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new UnexpectedException(UNEXPECTED_EXCEPTION);
 		}		 
 	    return  new BufferedReader(new InputStreamReader(inputStream));
 	}
