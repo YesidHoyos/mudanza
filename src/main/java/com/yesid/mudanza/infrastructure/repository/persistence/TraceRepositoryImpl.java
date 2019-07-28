@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.yesid.mudanza.domain.repository.TraceRepository;
 import com.yesid.mudanza.infrastructure.repository.builder.TraceBuilder;
+import com.yesid.mudanza.infrastructure.repository.entity.TraceEntity;
 import com.yesid.mudanza.infrastructure.repository.persistence.jpa.TraceRepositoryJpa;
 
 @Component
@@ -16,8 +17,9 @@ public class TraceRepositoryImpl implements TraceRepository{
 	TraceRepositoryJpa traceRepositoryJpa;
 	
 	@Override
-	public void saveTrace(String dni, LocalDateTime executionDate) {
-		traceRepositoryJpa.save(TraceBuilder.convertToTrace(dni, executionDate));
+	public String saveTrace(String dni, LocalDateTime executionDate) {
+		TraceEntity traceEntity = traceRepositoryJpa.save(TraceBuilder.convertToTrace(dni, executionDate));
+		return traceEntity.getId();
 	}
 
 }

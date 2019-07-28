@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 
 public interface TraceRepository {
 
-	public void saveTrace(String dni, LocalDateTime executionDate);
+	public String saveTrace(String dni, LocalDateTime executionDate);
 }

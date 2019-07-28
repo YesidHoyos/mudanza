@@ -16,6 +16,7 @@ import com.yesid.mudanza.domain.services.MakeMoveServices;
 @Component
 public class Carrier implements MakeMoveServices{
 	
+	public static final String ITEM_WEIGHT_INVALID = "El peso de un elemento a mover debe estar entre 1 y 100 libras";
 	public static final String NUMBER_MOVING_ITEMS_PER_WORKDAY_INVALID = "La cantidad de elementos a mover por dia debe estar entre 1 y 100 elementos";
 	public static final String NUMBER_WORKDAYS_INVALID = "La cantidad de días a trabajar debe estar entre 1 y 500 días";
 	private static final int MINIMUM_WEIGHT_TO_MOVE = 50;
@@ -48,24 +49,22 @@ public class Carrier implements MakeMoveServices{
 	}
 	
 	public void validateInput(List<Workday> workdays) {
-		validateWorkdays(workdays);
+		validateWorkdays(workdays.size());
 		workdays.stream().forEach(workday -> {
-			validateItemsToMovePerWorkday(workday.getItemsToMove());
+			validateItemsToMovePerWorkday(workday.getItemsToMove().size());
 			workday.getItemsToMove().stream()
 				.forEach(item -> validateItem(item));
 			
 		});
 	}
 	
-	public void validateWorkdays(List<Workday> workdays) {
-		int numberWorkdays = workdays.size();
+	public void validateWorkdays(int numberWorkdays) {
 		if(numberWorkdays > MAXIMUM_WORK_DAYS || numberWorkdays < MINIMUM_WORK_DAYS) {
 			throw new OutOfRangeException(NUMBER_WORKDAYS_INVALID);
 		}
 	}
 	
-	public void validateItemsToMovePerWorkday(List<Item> itemsToMove) {
-		int movingItemsPerWorkday = itemsToMove.size();
+	public void validateItemsToMovePerWorkday(int movingItemsPerWorkday) {
 		if(movingItemsPerWorkday > MAXIMUM_ITEMS_TO_MOVE_PER_WORKDAY 
 				|| movingItemsPerWorkday < MINIMUM_ITEMS_TO_MOVE_PER_WORKDAY) {
 			throw new OutOfRangeException(NUMBER_MOVING_ITEMS_PER_WORKDAY_INVALID);
@@ -75,7 +74,7 @@ public class Carrier implements MakeMoveServices{
 	public void validateItem(Item itemToMove) {
 		int weight = itemToMove.getWeight();
 		if(weight > MAXIMUM_ITEM_WEIGHT || weight < MINIMUM_ITEM_WEIGHT) {
-			throw new OutOfRangeException("El peso de un elemento a mover debe estar entre 1 y 100 libras");
+			throw new OutOfRangeException(ITEM_WEIGHT_INVALID);
 		}
 	}
 	
