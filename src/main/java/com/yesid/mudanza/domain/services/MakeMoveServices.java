@@ -9,7 +9,10 @@ public interface MakeMoveServices {
 	/**
 	 * Calcula la manera mas rentable para el transportador de que cantidad 
 	 * de elementos debe transportar en cada viaje por cada dia de mudanza.
-	 * @return cantidad de viajes realizados por cada dia de mudanza
+	 * 
+	 * @param workDays: días de trabajo con los elementos que hay que mover por día
+	 * @param dni: identificación del transportista
+	 * @return cantidad de viajes realizados por cada día de mudanza
 	 */
-	public List<Integer> makeElementTrips(List<Workday> workDays);
+	public List<String> makeElementTrips(List<Workday> workDays, String dni);
 }

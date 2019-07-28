@@ -3,11 +3,13 @@ package com.yesid.mudanza.infrastructure.repository.persistence;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.yesid.mudanza.domain.repository.TraceRepository;
 import com.yesid.mudanza.infrastructure.repository.builder.TraceBuilder;
 import com.yesid.mudanza.infrastructure.repository.persistence.jpa.TraceRepositoryJpa;
 
+@Component
 public class TraceRepositoryImpl implements TraceRepository{
 
 	@Autowired

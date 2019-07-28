@@ -2,13 +2,13 @@ package com.yesid.mudanza.domain.model;
 
 public class MovingElement {
 
-	private Double weight;
+	private int weight;
 	
-	public MovingElement(Double weight) {
+	public MovingElement(int weight) {
 		this.weight = weight;
 	}
 
-	public Double getWeight() {
+	public int getWeight() {
 		return weight;
 	}	
 }

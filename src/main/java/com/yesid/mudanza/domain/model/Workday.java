@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Workday {
 
-	private List<MovingElement> itemsToTransport;
+	private List<MovingElement> elementsToMove;
 	
-	public Workday(List<MovingElement> itemsToTransport) {
-		this.itemsToTransport = itemsToTransport;
+	public Workday(List<MovingElement> elementsToMove) {
+		this.elementsToMove = elementsToMove;
 	}
 
-	public List<MovingElement> getItemsToTransport() {
-		return itemsToTransport;
+	public List<MovingElement> getElementsToMove() {
+		return elementsToMove;
 	}
 }
