@@ -2,6 +2,7 @@ package com.yesid.mudanza.infrastructure.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.yesid.mudanza.application.handler.MakeMoveHandler;
 
 @RestController
 @RequestMapping(value = "/mudanza")
+@CrossOrigin(origins = "*")
 public class MudanzaController {
 
 	@Autowired
